@@ -1,11 +1,1 @@
-Save <a href='javascript:javascript:(function () {
-    ai_coach_script = document.createElement("script");
-    ai_coach_script.setAttribute("src","https://github.com/Frazer/AICoworker/coach.js");
-    if(ai_coach_script.addEventListener) {
-        ai_coach_script.addEventListener("load", function() { alert("loaded"); }, false);
-    }else if(ai_coach_script.readyState) {
-        ai_coach_script.onreadystatechange = function() { alert("ready"); };
-    }else {
-        ai_coach_script.onload = function() { alert("onloaded"); };
-    }
-    document.body.appendChild(ai_coach_script);})();'>this bookmarklet</a>
+Save <a href="javascript:(function()%7Bai_coach_script%20%3D%20document.createElement(%22script%22)%3B%0A%20%20%20%20ai_coach_script.setAttribute('src'%2C'https%3A%2F%2Fgithub.com%2FFrazer%2FAICoworker%2Fcoach.js')%3B%0A%20%20%20%20if(ai_coach_script.addEventListener)%20%7B%0A%20%20%20%20%20%20%20%20ai_coach_script.addEventListener(%22load%22%2C%20function()%20%7B%20alert('loaded')%3B%20%7D%2C%20false)%3B%0A%20%20%20%20%7Delse%20if(ai_coach_script.readyState)%20%7B%0A%20%20%20%20%20%20%20%20ai_coach_script.onreadystatechange%20%3D%20function()%20%7B%20alert('ready')%3B%20%7D%3B%0A%20%20%20%20%7Delse%20%7B%0A%20%20%20%20%20%20%20%20ai_coach_script.onload%20%3D%20function()%20%7B%20alert('onloaded')%3B%20%7D%3B%0A%20%20%20%20%7D%0A%20%20%20%20document.body.appendChild(ai_coach_script)%3B%7D)()%3B">this bookmarklet</a>
