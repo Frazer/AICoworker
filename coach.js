@@ -1,1 +1,0 @@
-window.testCoach = () => alert('hi');
