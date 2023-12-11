@@ -1,1 +1,1 @@
-let testCoach = () => alert('hi');
+window.testCoach = () => alert('hi');
