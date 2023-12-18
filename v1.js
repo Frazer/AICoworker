@@ -13,21 +13,53 @@ javascript:(function(){
     "Keep me motivated",
   ];
 
+  const host = window.location.host;
+
+  let promptField;
+  let submitButton;
+
+  let submitPrompt;
+
+
+  const triggerReactOnChangeEvent = (element) => {
+  let ev = new Event('change');
+  Object.defineProperty(ev, 'target', {writable: false, value: element});
+  let reactEventHandlersName = Object.keys(element).filter(key => key.match('Props'));
+  element[reactEventHandlersName].onChange(ev);
+}
+
+  if(host==="chat.openai.com") {
+    promptField = document.querySelector('#prompt-textarea');
+    submitButton = [...promptField.parentElement.querySelectorAll('button')].pop();
+    submitPrompt = (prev) => {
+      let myEvent = new InputEvent('input', {
+        bubbles: true,
+        cancelable: true,
+        inputType: 'insertText',
+        data: 'Your text here',
+      });
+      promptField.dispatchEvent(myEvent);
+      setTimeout(() => {
+        submitButton.click();
+        promptField.value = prev;
+      }, 400);
+    };
+  }else if(host==="pi.ai") {
+    promptField = document.querySelectorAll("textarea")[0];
+    submitButton = [...promptField.parentElement.parentElement.querySelectorAll('button')].pop();
+    submitPrompt = (prev) => {
+      triggerReactOnChangeEvent(promptField);
+      setTimeout(() => {
+        submitButton.click();
+        promptField.value = prev;
+      }, 400);
+    };
+  }
+
   function updatePromptText() {
-    const x = document.querySelector('#prompt-textarea');
-    let prev = x.value;
-    x.value = motivationalQuestions[Math.floor(Math.random() * motivationalQuestions.length)];
-    let myEvent = new InputEvent('input', {
-      bubbles: true,
-      cancelable: true,
-      inputType: 'insertText',
-      data: 'Your text here',
-    });
-    x.dispatchEvent(myEvent);
-    setTimeout(() => {
-      [...x.parentElement.querySelectorAll('button')].pop().click();
-      x.value = prev;
-    }, 400);
+    let prev = promptField.value;
+    promptField.value = motivationalQuestions[Math.floor(Math.random() * motivationalQuestions.length)];
+    submitPrompt(prev);
   }
 
   let timerSound = 0;
