@@ -20,6 +20,12 @@ javascript:(function(){
 
   let submitPrompt;
 
+  let setText = () => {
+    let prev = promptField.value;
+    promptField.value = motivationalQuestions[Math.floor(Math.random() * motivationalQuestions.length)];
+    return prev;
+  }
+
 
   const triggerReactOnChangeEvent = (element) => {
   let ev = new Event('change');
@@ -54,11 +60,27 @@ javascript:(function(){
         promptField.value = prev;
       }, 400);
     };
+  }else if(host==="claude.ai"){
+    setText = () => {
+      promptField = [...document.querySelectorAll('div div div fieldSet p')].pop();
+      let prev = promptField.innerText;
+      promptField.innerText = motivationalQuestions[Math.floor(Math.random() * motivationalQuestions.length)];
+      return prev;
+    }
+    submitPrompt = (prev) => {
+      setTimeout(() => {
+        submitButton= [...document.querySelectorAll('fieldset button')].pop();
+        submitButton.click();
+        setTimeout(() => {
+          promptField = [...document.querySelectorAll('div div div fieldSet p')].pop();
+          promptField.innerText = prev;
+          }, 1000);
+      }, 400);
+    };
   }
 
   function updatePromptText() {
-    let prev = promptField.value;
-    promptField.value = motivationalQuestions[Math.floor(Math.random() * motivationalQuestions.length)];
+    let prev = setText();
     submitPrompt(prev);
   }
 
